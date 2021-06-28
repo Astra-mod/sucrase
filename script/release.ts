@@ -28,10 +28,6 @@ async function main(): Promise<void> {
   console.log("Taking a quick nap to make sure we update with the right version.");
   await sleep(30000);
   await run("yarn add sucrase@latest");
-  process.chdir("./website");
-  await run("yarn add sucrase@latest");
-  await run("yarn publish-website");
-  process.chdir("..");
   await run(`git commit -a -m "v${version}"`);
   console.log("Done! Please sanity-check the commit, then push.");
 }

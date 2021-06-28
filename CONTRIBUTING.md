@@ -74,8 +74,6 @@ several smaller packages/projects). Here are the most important directories:
   is most relevant. Nearly all tests simply give code as input and assert the
   output code. Running a test in debug mode and stepping through different parts
   of the code is a great way to learn how Sucrase works!
-* The `website` directory contains the full code for the
-  [sucrase.io website](https://sucrase.io).
 * The `integrations` directory has several small packages integrating Sucrase
   with Webpack, Jest, etc.
 * The `example-runner` directory has code to clone various open source projects,

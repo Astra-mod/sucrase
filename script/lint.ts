@@ -19,7 +19,6 @@ async function main(): Promise<void> {
     checkProject("./integrations/jest-plugin"),
     checkProject("./integrations/webpack-loader"),
     checkProject("./integrations/webpack-object-rest-spread-plugin"),
-    checkProject("./website"),
   ]);
 }
 
