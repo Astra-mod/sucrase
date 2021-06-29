@@ -14,6 +14,16 @@ import {assertOutput, assertResult} from "./util";
  * Test cases that aren't associated with any particular transform.
  */
 describe("sucrase", () => {
+  it("adds use strict to the top if it is enabled", () => {
+    assertResult(
+      `
+    `,
+      `"use strict";
+    `,
+      {transforms: [], addUseStrict: true},
+    );
+  });
+
   it("handles keywords as object keys", () => {
     assertResult(
       `
@@ -57,7 +67,7 @@ describe("sucrase", () => {
         delete: new KeywordTokenType("delete", { beforeExpr, prefix, startsExpr }),
       };
     `,
-      `"use strict";${ESMODULE_PREFIX}
+      `${ESMODULE_PREFIX}
        const keywords = {
         break: new KeywordTokenType("break"),
         case: new KeywordTokenType("case", { beforeExpr }),
@@ -108,7 +118,7 @@ describe("sucrase", () => {
         function: 3,
       };
     `,
-      `"use strict";
+      `
       const o = {
         function: 3,
       };
@@ -124,7 +134,7 @@ describe("sucrase", () => {
         }
       }
     `,
-      `"use strict";
+      `
       class A {
         [b]() {
         }
@@ -145,7 +155,7 @@ describe("sucrase", () => {
         }
       }
     `,
-      `"use strict";
+      `
       class A {
         get foo() {
           return 3;
@@ -164,7 +174,7 @@ describe("sucrase", () => {
       if (foo.case === 3) {
       }
     `,
-      `"use strict";
+      `
       if (foo.case === 3) {
       }
     `,
@@ -182,7 +192,7 @@ describe("sucrase", () => {
         }
       }
     `,
-      `"use strict";
+      `
       function foo() {
         outer: switch (a) {
           default:
@@ -205,7 +215,7 @@ describe("sucrase", () => {
         const x = 3;
       }
     `,
-      `"use strict";
+      `
       /**
        * This is a JSDoc comment.
        */
@@ -228,7 +238,7 @@ describe("sucrase", () => {
         }
       }
     `,
-      `"use strict";
+      `
       class A {
         get() {
         }
@@ -248,7 +258,7 @@ describe("sucrase", () => {
         }
       }
     `,
-      `"use strict";
+      `
       class A {
         async foo() {
         }
@@ -266,7 +276,7 @@ describe("sucrase", () => {
         }
       }
     `,
-      `"use strict";
+      `
       class A {
         *foo() {
         }
@@ -285,7 +295,7 @@ describe("sucrase", () => {
         }
       }
     `,
-      `"use strict";
+      `
       class C {
         async *m() {
           yield await 1;
@@ -302,7 +312,7 @@ describe("sucrase", () => {
       const n = 1_000_000;
       const x = 12_34.56_78;
     `,
-      `"use strict";
+      `
       const n = 1000000;
       const x = 1234.5678;
     `,
@@ -316,7 +326,7 @@ describe("sucrase", () => {
       const Import = null;
       export {Import as import};
     `,
-      `"use strict";${ESMODULE_PREFIX}
+      `${ESMODULE_PREFIX}
       const Import = null;
       exports.import = Import;
     `,
@@ -331,7 +341,7 @@ describe("sucrase", () => {
         static x = 3;
       }
     `,
-      `"use strict";
+      `
       class A {
         static __initStatic() {this.x = 3}
       } A.__initStatic();
@@ -347,7 +357,7 @@ describe("sucrase", () => {
         static x = 3;
       }
     `,
-      `"use strict"; var _class;
+      ` var _class;
       const A = (_class = class {
         static __initStatic() {this.x = 3}
       }, _class.__initStatic(), _class)
@@ -363,7 +373,7 @@ describe("sucrase", () => {
         x = 3;
       }
     `,
-      `"use strict"; var _class;
+      ` var _class;
       const A = (_class = class {constructor() { _class.prototype.__init.call(this); }
         __init() {this.x = 3}
       }, _class)
@@ -379,7 +389,7 @@ describe("sucrase", () => {
         static x = 3;
       }
     `,
-      `"use strict";${ESMODULE_PREFIX}
+      `${ESMODULE_PREFIX}
        class C {
         static __initStatic() {this.x = 3}
       } C.__initStatic(); exports.default = C;
@@ -398,7 +408,7 @@ describe("sucrase", () => {
         static b = B;
       }
     `,
-      `"use strict";${IMPORT_DEFAULT_PREFIX}
+      `${IMPORT_DEFAULT_PREFIX}
       var _A = require('A'); var _A2 = _interopRequireDefault(_A);
       var _B = require('B'); var _B2 = _interopRequireDefault(_B);
       class C {constructor() { C.prototype.__init.call(this); }
@@ -416,7 +426,7 @@ describe("sucrase", () => {
       console.log("Hello");
     `,
       `#!/usr/bin/env node
-"use strict";      console.log("Hello");
+      console.log("Hello");
     `,
       {transforms: ["jsx", "imports", "typescript"]},
     );
@@ -432,7 +442,7 @@ describe("sucrase", () => {
         console.log("Failed!");
       }
     `,
-      `"use strict";
+      `
       const e = 3;
       try {
         console.log(e);
@@ -449,7 +459,7 @@ describe("sucrase", () => {
       `
       [a] = b;
     `,
-      `"use strict";
+      `
       [a] = b;
     `,
       {transforms: ["jsx", "imports", "typescript"]},
@@ -461,7 +471,7 @@ describe("sucrase", () => {
       `
       const x = +(y);
     `,
-      `"use strict";
+      `
       const x = +(y);
     `,
       {transforms: ["jsx", "imports", "typescript"]},
@@ -476,7 +486,7 @@ describe("sucrase", () => {
         }
       };
     `,
-      `"use strict";
+      `
       const o = {
         async f() {
         }
@@ -491,7 +501,7 @@ describe("sucrase", () => {
       `
       const s = 'ab\\'cd';
     `,
-      `"use strict";
+      `
       const s = 'ab\\'cd';
     `,
       {transforms: ["jsx", "imports", "typescript"]},
@@ -506,7 +516,7 @@ describe("sucrase", () => {
         static x = 1;
       }
     `,
-      `"use strict";
+      `
        @dec class A {
         
       } A.x = 1; exports.default = A;
@@ -522,7 +532,7 @@ describe("sucrase", () => {
       c ||= d;
       e ??= f;
     `,
-      `"use strict";
+      `
       a &&= b;
       c ||= d;
       e ??= f;
@@ -544,7 +554,7 @@ describe("sucrase", () => {
         outerMethod() {}
       }
     `,
-      `"use strict";
+      `
       class Bar{
         @(
           @classDec class { 
@@ -564,7 +574,7 @@ describe("sucrase", () => {
       `
       const createReactClass = 3;
     `,
-      `"use strict";
+      `
       const createReactClass = 3;
     `,
       {transforms: ["jsx", "imports", "typescript"]},
@@ -581,7 +591,7 @@ describe("sucrase", () => {
         }
       }
     `,
-      `"use strict";
+      `
       class A {
         static __initStatic() {this.b = {}}
         c () {
@@ -604,7 +614,7 @@ describe("sucrase", () => {
       
       export default function() {}
     `,
-      `"use strict";${ESMODULE_PREFIX}
+      `${ESMODULE_PREFIX}
        class Observer {constructor() { Observer.prototype.__init.call(this);Observer.prototype.__init2.call(this);Observer.prototype.__init3.call(this); }
         __init() {this.update = (v) => {}}
         __init2() {this.complete = () => {}}
@@ -624,7 +634,7 @@ describe("sucrase", () => {
         ;
       }
     `,
-      `"use strict";
+      `
       class A {
         
       }
@@ -640,7 +650,7 @@ describe("sucrase", () => {
         // This is a comment.
       }
     `,
-      `"use strict";
+      `
       
 
 
@@ -658,7 +668,7 @@ describe("sucrase", () => {
         static "test" = "value";
       }
     `,
-      `"use strict";
+      `
       class C {
         static __initStatic() {this[f] = 3}
         static __initStatic2() {this[5] = 'Hello'}
@@ -681,7 +691,7 @@ describe("sucrase", () => {
         }
       }
     `,
-      `"use strict";
+      `
       class C {constructor() { C.prototype.__init.call(this); }
         f() {
         }
@@ -714,7 +724,7 @@ describe("sucrase", () => {
       async
       x => x
     `,
-      `"use strict";${IMPORT_DEFAULT_PREFIX}
+      `${IMPORT_DEFAULT_PREFIX}
       var _foo = require('foo'); var _foo2 = _interopRequireDefault(_foo);
       _foo2.default
       x => x
@@ -794,7 +804,7 @@ describe("sucrase", () => {
   });
 
   it("handles a file with only an assignment", () => {
-    assertResult("a = 1", '"use strict";a = 1', {transforms: ["imports"]});
+    assertResult("a = 1", "a = 1", {transforms: ["imports"]});
   });
 
   it("handles a standalone comment that looks like it could be a regex", () => {

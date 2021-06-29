@@ -51,6 +51,10 @@ export interface Options {
    * separators, etc.
    */
   disableESTransforms?: boolean;
+  /**
+   * Add use strict on top of each file
+   */
+  addUseStrict?: boolean;
 }
 
 export function validateOptions(options: Options): void {

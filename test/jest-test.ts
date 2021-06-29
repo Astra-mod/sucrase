@@ -56,7 +56,7 @@ jest.doMock('a', () => {});
         jest.unmock('c')
       `,
       {
-        expectedCJSResult: `"use strict";${IMPORT_DEFAULT_PREFIX}__jestHoist();__jestHoist2();__jestHoist3();
+        expectedCJSResult: `${IMPORT_DEFAULT_PREFIX}__jestHoist();__jestHoist2();__jestHoist3();
         var _a = require('a');
 function __jestHoist(){jest.mock('a');};
         var _b = require('b');
@@ -85,7 +85,7 @@ function __jestHoist3(){jest.unmock('c');}
 
       export const x = 1
     `,
-      `"use strict";${ESMODULE_PREFIX}${IMPORT_DEFAULT_PREFIX}__jestHoist();
+      `${ESMODULE_PREFIX}${IMPORT_DEFAULT_PREFIX}__jestHoist();
       var _a = require('./a'); var _a2 = _interopRequireDefault(_a);
       var _b = require('./b');
 function __jestHoist(){jest.mock('a');};
@@ -105,7 +105,7 @@ jest.mock('a', () => ({
   }
 }));
     `,
-      `"use strict";${IMPORT_DEFAULT_PREFIX}${NULLISH_COALESCE_PREFIX}${OPTIONAL_CHAIN_PREFIX}__jestHoist();
+      `${IMPORT_DEFAULT_PREFIX}${NULLISH_COALESCE_PREFIX}${OPTIONAL_CHAIN_PREFIX}__jestHoist();
       var _a = require('./a'); var _a2 = _interopRequireDefault(_a);
 function __jestHoist(){jest.mock('a', () => ({
   f(x) {
@@ -127,7 +127,7 @@ jest.mock('a'! as number, (arg: unknown) => ({
 }) as any);
       x()
     `,
-      `"use strict";__jestHoist();
+      `__jestHoist();
       var _a = require('./a');
 function __jestHoist(){jest.mock('a' , (arg) => ({
   f(x) {
@@ -151,7 +151,7 @@ jest.mock('a': number, (arg: string) => ({
 }): any);
       x()
     `,
-      `"use strict";__jestHoist();
+      `__jestHoist();
       var _a = require('./a');
 function __jestHoist(){jest.mock('a', (arg) => ({
   f(x) {
@@ -176,7 +176,7 @@ function __jestHoist(){jest.mock('a', (arg) => ({
       }));
       x()
     `,
-      `"use strict";${JSX_PREFIX}${IMPORT_DEFAULT_PREFIX}__jestHoist();
+      `${JSX_PREFIX}${IMPORT_DEFAULT_PREFIX}__jestHoist();
       var _react = require('react'); var _react2 = _interopRequireDefault(_react);
       var _a = require('./a');
 function __jestHoist(){jest.mock('a', (arg) => ({
@@ -197,7 +197,7 @@ function __jestHoist(){jest.mock('a', (arg) => ({
       jest.mock('x');
     `,
       {
-        expectedCJSResult: `"use strict";
+        expectedCJSResult: `
       var _a = require('./a');
       _a.jest.mock('x');
     `,
@@ -217,7 +217,7 @@ function __jestHoist(){jest.mock('x');};
       import {jest} from './b';
       jest.mock('x');
     `,
-      `"use strict";
+      `
       require('./a');
       var _b = require('./b');
       _b.jest.mock('x');
@@ -232,7 +232,7 @@ function __jestHoist(){jest.mock('x');};
       import './a';
       console.log(jest.spyOn({foo() {}}, 'foo').getMockName());
     `,
-      `"use strict";
+      `
       require('./a');
       console.log(jest.spyOn({foo() {}}, 'foo').getMockName());
     `,

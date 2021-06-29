@@ -1,3 +1,7 @@
+# 3.20.0 (2021-06-29)
+
+* Add option to enable adding use strict, instead of forcing it in each time
+
 # 3.19.0 (2021-06-23)
 
 * Add option to disable ES transforms. ([#623], [#624], [#625]) (Denys Kniazevych, Alan Pierce)
@@ -121,15 +125,18 @@
 # 3.9.2 (2019-01-02)
 
 * Fix crash on optional arrow function params without type annotations. ([#389])
+* Usability bug fixes for website. ([#390])
 
 # 3.9.1 (2018-12-31)
 
 * Fix react-hot-loader transform syntax error with some export styles. ([#384])
+* Fix website to properly show react-hot-loader Babel transform output. ([#386])
 
 # 3.9.0 (2018-12-30)
 
 * Add a react-hot-loader transform. ([#376])
 * Add support for dynamic `import()` syntax in TS types. ([#380])
+* Many improvements to the website, including faster initial pageloads.
 * Small performance improvements.
 
 # 3.8.1 (2018-12-03)

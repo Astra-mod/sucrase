@@ -13,7 +13,7 @@ describe("transform react-display-name", () => {
         }
       });
     `,
-      `"use strict";${JSX_PREFIX}${IMPORT_DEFAULT_PREFIX}
+      `${JSX_PREFIX}${IMPORT_DEFAULT_PREFIX}
       var _react = require('react'); var _react2 = _interopRequireDefault(_react);
 
       const C = _react2.default.createClass({displayName: 'C',
@@ -37,7 +37,7 @@ describe("transform react-display-name", () => {
         }
       });
     `,
-      `"use strict";${JSX_PREFIX}${IMPORT_DEFAULT_PREFIX}
+      `${JSX_PREFIX}${IMPORT_DEFAULT_PREFIX}
       var _react = require('react'); var _react2 = _interopRequireDefault(_react);
       var _createreactclass = require('create-react-class'); var _createreactclass2 = _interopRequireDefault(_createreactclass);
 
@@ -57,18 +57,18 @@ describe("transform react-display-name", () => {
 
       const C = React.createClass({
         displayName: 'Foo',
-        
+
         render() {
           return <div />;
         }
       });
     `,
-      `"use strict";${JSX_PREFIX}${IMPORT_DEFAULT_PREFIX}
+      `${JSX_PREFIX}${IMPORT_DEFAULT_PREFIX}
       var _react = require('react'); var _react2 = _interopRequireDefault(_react);
 
       const C = _react2.default.createClass({
         displayName: 'Foo',
-        
+
         render() {
           return _react2.default.createElement('div', {${devProps(8)}} );
         }
@@ -88,7 +88,7 @@ describe("transform react-display-name", () => {
         }
       });
     `,
-      `"use strict";${JSX_PREFIX}${IMPORT_DEFAULT_PREFIX}
+      `${JSX_PREFIX}${IMPORT_DEFAULT_PREFIX}
       var _react = require('react'); var _react2 = _interopRequireDefault(_react);
 
       _react2.default.createClass({
@@ -113,7 +113,7 @@ describe("transform react-display-name", () => {
         })
       };
     `,
-      `"use strict";${IMPORT_DEFAULT_PREFIX}
+      `${IMPORT_DEFAULT_PREFIX}
       var _react = require('react'); var _react2 = _interopRequireDefault(_react);
 
       const o = {
@@ -139,7 +139,7 @@ describe("transform react-display-name", () => {
         }
       });
     `,
-      `"use strict";${IMPORT_DEFAULT_PREFIX}
+      `${IMPORT_DEFAULT_PREFIX}
       var _react = require('react'); var _react2 = _interopRequireDefault(_react);
 
       const C = _react2.default.createClass({displayName: 'C',
@@ -163,7 +163,7 @@ describe("transform react-display-name", () => {
         }
       });
     `,
-      `"use strict";const _jsxFileName = "MyComponent.js";${ESMODULE_PREFIX}${IMPORT_DEFAULT_PREFIX}
+      `const _jsxFileName = "MyComponent.js";${ESMODULE_PREFIX}${IMPORT_DEFAULT_PREFIX}
       var _react = require('react'); var _react2 = _interopRequireDefault(_react);
 
       exports. default = _react2.default.createClass({displayName: 'MyComponent',
@@ -186,7 +186,7 @@ describe("transform react-display-name", () => {
         }
       });
     `,
-      `"use strict";const _jsxFileName = "MyComponent.js";${IMPORT_DEFAULT_PREFIX}
+      `const _jsxFileName = "MyComponent.js";${IMPORT_DEFAULT_PREFIX}
       var _react = require('react'); var _react2 = _interopRequireDefault(_react);
       a.b.c = _react2.default.createClass({displayName: 'c',
         render() {

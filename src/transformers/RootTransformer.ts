@@ -27,6 +27,7 @@ export default class RootTransformer {
   private isReactHotLoaderTransformEnabled: boolean;
   private disableESTransforms: boolean;
   private helperManager: HelperManager;
+  private addUseStrict: boolean;
 
   constructor(
     sucraseContext: SucraseContext,
@@ -41,6 +42,7 @@ export default class RootTransformer {
     this.isImportsTransformEnabled = transforms.includes("imports");
     this.isReactHotLoaderTransformEnabled = transforms.includes("react-hot-loader");
     this.disableESTransforms = Boolean(options.disableESTransforms);
+    this.addUseStrict = Boolean(options.addUseStrict);
 
     if (!options.disableESTransforms) {
       this.transformers.push(
@@ -116,9 +118,8 @@ export default class RootTransformer {
   transform(): string {
     this.tokens.reset();
     this.processBalancedCode();
-    const shouldAddUseStrict = this.isImportsTransformEnabled;
     // "use strict" always needs to be first, so override the normal transformer order.
-    let prefix = shouldAddUseStrict ? '"use strict";' : "";
+    let prefix = this.addUseStrict ? '"use strict";' : "";
     for (const transformer of this.transformers) {
       prefix += transformer.getPrefixCode();
     }

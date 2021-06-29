@@ -31,7 +31,7 @@ describe("transform flow", () => {
       import {type i, type j} from 'k';
       import type L from 'L';
     `,
-      `"use strict";${IMPORT_DEFAULT_PREFIX}
+      `${IMPORT_DEFAULT_PREFIX}
       
       var _d = require('d'); var _d2 = _interopRequireDefault(_d);
       var _e = require('e'); var _e2 = _interopRequireDefault(_e);
@@ -48,7 +48,7 @@ describe("transform flow", () => {
       type A<T> = ?number;
       const f = (): number => 3;
     `,
-      `"use strict";
+      `
       
       const f = () => 3;
     `,
@@ -63,7 +63,7 @@ describe("transform flow", () => {
         -bar: number;
       }
     `,
-      `"use strict";
+      `
       class C {
         
         
@@ -77,7 +77,7 @@ describe("transform flow", () => {
       `
       const x: a => b = 2;
     `,
-      `"use strict";
+      `
       const x = 2;
     `,
     );
@@ -93,7 +93,7 @@ describe("transform flow", () => {
         return [];
       }
     `,
-      `"use strict";
+      `
       function partition(
         list,
         test,
@@ -111,7 +111,7 @@ describe("transform flow", () => {
         return 3;
       }
     `,
-      `"use strict";
+      `
       function foo() {
         return 3;
       }
@@ -124,7 +124,7 @@ describe("transform flow", () => {
       `
       export type * from "a";
     `,
-      `"use strict";
+      `
       
     `,
     );
@@ -136,7 +136,7 @@ describe("transform flow", () => {
       import {typeof a as b} from 'c';
       import typeof d from 'e';
     `,
-      `"use strict";
+      `
       
       
     `,
@@ -148,7 +148,7 @@ describe("transform flow", () => {
       `
       export type {foo};
     `,
-      `"use strict";
+      `
       
     `,
     );
@@ -159,7 +159,7 @@ describe("transform flow", () => {
       `
       import { a as b } from "c";
     `,
-      `"use strict";
+      `
       var _c = require('c');
     `,
     );
@@ -171,7 +171,7 @@ describe("transform flow", () => {
       function makeWeakCache<A: B>(): void {
       }
     `,
-      `"use strict";
+      `
       function makeWeakCache() {
       }
     `,
@@ -183,7 +183,7 @@ describe("transform flow", () => {
       `
       const x: *=>3 = null;
     `,
-      `"use strict";
+      `
       const x = null;
     `,
     );
@@ -196,7 +196,7 @@ describe("transform flow", () => {
         @@iterator(): Iterator<File>;
       }
     `,
-      `"use strict";
+      `
       
 
 
@@ -209,7 +209,7 @@ describe("transform flow", () => {
       `
       declare class A implements B, C {}
     `,
-      `"use strict";
+      `
       
     `,
     );
@@ -238,7 +238,7 @@ describe("transform flow", () => {
       }
       // @flow
     `,
-      `"use strict";
+      `
       /* Hello  */
       // World 
       function foo() {
@@ -254,7 +254,7 @@ describe("transform flow", () => {
       `
       type T = { [[foo]]: X }
     `,
-      `"use strict";
+      `
       
     `,
     );
@@ -265,7 +265,7 @@ describe("transform flow", () => {
       `
       type T = { [[foo]]?: X }
     `,
-      `"use strict";
+      `
       
     `,
     );
@@ -277,7 +277,7 @@ describe("transform flow", () => {
       f<T>();
       new C<T>();
     `,
-      `"use strict";
+      `
       f();
       new C();
     `,
@@ -289,7 +289,7 @@ describe("transform flow", () => {
       `
       type T = interface { p: string }
     `,
-      `"use strict";
+      `
       
     `,
     );
@@ -302,7 +302,7 @@ describe("transform flow", () => {
         proto x: T;
       }
     `,
-      `"use strict";
+      `
       
 
 
@@ -315,7 +315,7 @@ describe("transform flow", () => {
       `
       type T = interface { static(): number }
     `,
-      `"use strict";
+      `
       
     `,
     );
@@ -331,7 +331,7 @@ describe("transform flow", () => {
         #prop2: number = value;
       }
     `,
-      `"use strict";
+      `
       class A {
         #prop1;
         #prop2 = value;
@@ -347,7 +347,7 @@ describe("transform flow", () => {
       type U = {x: number, ...};
       type V = {x: number, ...V, ...U};
     `,
-      `"use strict";
+      `
       
 
 
@@ -360,7 +360,7 @@ describe("transform flow", () => {
       `
       type T = Array<(string) => number> 
     `,
-      `"use strict";
+      `
        
     `,
     );
@@ -378,7 +378,7 @@ describe("transform flow", () => {
       >();
       new test<_>(); 
     `,
-      `"use strict";
+      `
       test
 
 
@@ -396,7 +396,7 @@ describe("transform flow", () => {
       `
       foo(n : number);
     `,
-      `"use strict";
+      `
       foo(n );
     `,
     );
@@ -426,7 +426,7 @@ describe("transform flow", () => {
         }
       }
     `,
-      `"use strict";
+      `
       class Foo  {constructor() { Foo.prototype.__init.call(this); }
         __init() {this.baz = () => {
       
@@ -444,7 +444,7 @@ describe("transform flow", () => {
         -bar: number;
       }
     `,
-      `"use strict";
+      `
       class C {
         foo;
         bar;
