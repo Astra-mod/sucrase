@@ -7,6 +7,7 @@ async function main(): Promise<void> {
   await run(`rm -rf ./build`);
   await run("mkdir ./build");
   await run("cp -r ./bin ./build/bin");
+  await run("cp -r ./dist ./build/dist");
   await run("cp -r ./register ./build/register ");
   await run("cp ./CHANGELOG.md ./build/CHANGELOG.md");
   await run("cp ./LICENSE ./build/LICENSE");
