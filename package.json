@@ -29,7 +29,8 @@
     "test-only": "mocha './test/**/*.ts'",
     "test262": "sucrase-node test262/run-test262.ts",
     "test-with-coverage": "nyc mocha './test/**/*.ts'",
-    "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
+    "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
+    "prepare-publish": "sucrase-node script/preparePublish.ts"
   },
   "repository": {
     "type": "git",
