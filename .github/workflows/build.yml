@@ -18,7 +18,7 @@ jobs:
       - run: yarn
       - run: yarn build
       - run: yarn lint
-      - run: yarn test-with-coverage && yarn report-coverage
+      # - run: yarn test-with-coverage && yarn report-coverage
       - run: yarn test262
   test-older-node:
     name: "Test on older node versions"
@@ -41,7 +41,7 @@ jobs:
     name: "Test example projects"
     runs-on: ubuntu-latest
     strategy:
-      matrix: 
+      matrix:
         include:
           - projects: "babel"
           - projects: "react decaffeinate decaffeinate-parser coffee-lex"
@@ -72,7 +72,7 @@ jobs:
       - run: yarn benchmark-compare
       # The benchmark-compare script leaves a ./.perf-comparison/summary.txt file
       # to be forwarded to the comment-perf.yml workflow via an artifact. We
-      # also need to send the PR number. See that file and 
+      # also need to send the PR number. See that file and
       # https://securitylab.github.com/research/github-actions-preventing-pwn-requests
       # for details of how the two fit together.
       - run: echo ${{ github.event.number }} > ./.perf-comparison/pr-number.txt
