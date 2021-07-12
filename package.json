@@ -1,12 +1,13 @@
 {
-  "name": "sucrase",
-  "version": "3.19.0",
+  "name": "@astra-mod/sucrase",
+  "version": "3.19.1",
   "description": "Super-fast alternative to Babel for when you can target modern JS runtimes",
   "author": "Alan Pierce <alangpierce@gmail.com>",
   "license": "MIT",
   "main": "dist/index",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "private": false,
   "bin": {
     "sucrase": "./bin/sucrase",
     "sucrase-node": "./bin/sucrase-node"
@@ -34,7 +35,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/alangpierce/sucrase.git"
+    "url": "https://github.com/Astra-mod/sucrase.git"
   },
   "keywords": [
     "babel",
@@ -43,7 +44,7 @@
     "flow"
   ],
   "bugs": {
-    "url": "https://github.com/alangpierce/sucrase/issues"
+    "url": "https://github.com/Astra-mod/sucrase/issues"
   },
   "devDependencies": {
     "@types/glob": "7.1.1",

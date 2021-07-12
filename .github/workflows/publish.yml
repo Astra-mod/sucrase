@@ -7,8 +7,8 @@ on:
       - completed
 
 jobs:
-  publish:
-    name: "Publish to build branch"
+  commit:
+    name: "Commit to build branch"
     runs-on: ubuntu-latest
     if: >
       ${{ github.event.workflow_run.event != 'pull_request' &&
@@ -28,3 +28,15 @@ jobs:
           FOLDER: build # The directory where your assets are generated
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub will automatically add this - you don't need to bother getting a token
           MESSAGE: "Build: ({sha}) {msg}" # The commit message
+  publish:
+    name: "Publish to npm"
+    runs-on: ubuntu-latest
+    if: >
+      ${{ github.event.workflow_run.event != 'pull_request' &&
+      github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          package: ./build/package.json
+          access: "public"
