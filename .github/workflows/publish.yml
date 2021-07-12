@@ -1,0 +1,32 @@
+name: "Publish built version to build branch"
+
+on:
+  workflow_run:
+    workflows: ["All tests"]
+    types:
+      - completed
+
+jobs:
+  post-perf-comparison:
+    name: "Publish to build branch"
+    runs-on: ubuntu-latest
+    if: >
+      ${{ github.event.workflow_run.event != 'pull_request' &&
+      github.event.workflow_run.conclusion == 'success' }}
+    steps:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '15'
+      - run: yarn
+      - run: yarn build
+      - run: yarn prepare-publish
+      - uses: s0/git-publish-subdir-action@develop
+      - env:
+          REPO: self
+          BRANCH: build # The branch name where you want to push the assets
+          FOLDER: build # The directory where your assets are generated
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub will automatically add this - you don't need to bother getting a token
+          MESSAGE: "Build: ({sha}) {msg}" # The commit message
