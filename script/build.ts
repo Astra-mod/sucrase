@@ -76,7 +76,7 @@ async function buildIntegration(path: string): Promise<void> {
     const originalDir = process.cwd();
     process.chdir(path);
     await run("yarn");
-    await run("yarn link sucrase");
+    await run("yarn link @astra-mod/sucrase");
     process.chdir(originalDir);
   }
 
