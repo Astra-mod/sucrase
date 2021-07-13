@@ -442,7 +442,7 @@ describe("transform flow", () => {
       type A = Obj['a'];
       type B = Array<string>[number];
     `,
-      `"use strict";
+      `
       
 
     `,
@@ -455,14 +455,14 @@ describe("transform flow", () => {
       type A = Obj?.['a'];
       type B = Array<string>?.[number];
     `,
-      `"use strict";
+      `
       
 
     `,
     );
   });
 
-  it("properly removes class property variance markers with ES transforms disabled", () => {
+  it("properly removes class property with ES transforms disabled", () => {
     assertFlowResult(
       `
       class C {
@@ -472,8 +472,8 @@ describe("transform flow", () => {
     `,
       `
       class C {
-        foo;
-        bar;
+        ;
+        ;
       }
     `,
       {disableESTransforms: true},

@@ -646,7 +646,7 @@ describe("typescript transform", () => {
         export = result;
       }
     `,
-      `"use strict";
+      `
       
 
 
@@ -2733,7 +2733,7 @@ describe("typescript transform", () => {
     );
   });
 
-  it("removes types from class fields with disableESTransforms", () => {
+  it("removes types and some fields from classes with disableESTransforms", () => {
     assertTypeScriptESMResult(
       `
       class A {
@@ -2747,8 +2747,8 @@ describe("typescript transform", () => {
       class A {
         x = 3;
         static y = "Hello";
-        z;
-        static s;
+        ;
+        ;
       }
     `,
       {disableESTransforms: true},
