@@ -23,7 +23,8 @@ export var ContextualKeyword; (function (ContextualKeyword) {
   const _namespace = _module + 1; ContextualKeyword[ContextualKeyword["_namespace"] = _namespace] = "_namespace";
   const _of = _namespace + 1; ContextualKeyword[ContextualKeyword["_of"] = _of] = "_of";
   const _opaque = _of + 1; ContextualKeyword[ContextualKeyword["_opaque"] = _opaque] = "_opaque";
-  const _private = _opaque + 1; ContextualKeyword[ContextualKeyword["_private"] = _private] = "_private";
+  const _override = _opaque + 1; ContextualKeyword[ContextualKeyword["_override"] = _override] = "_override";
+  const _private = _override + 1; ContextualKeyword[ContextualKeyword["_private"] = _private] = "_private";
   const _protected = _private + 1; ContextualKeyword[ContextualKeyword["_protected"] = _protected] = "_protected";
   const _proto = _protected + 1; ContextualKeyword[ContextualKeyword["_proto"] = _proto] = "_proto";
   const _public = _proto + 1; ContextualKeyword[ContextualKeyword["_public"] = _public] = "_public";

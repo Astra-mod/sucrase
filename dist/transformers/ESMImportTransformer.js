@@ -42,8 +42,32 @@ var _Transformer = require('./Transformer'); var _Transformer2 = _interopRequire
     if (this.tokens.matches3(_types.TokenType._import, _types.TokenType.name, _types.TokenType.eq)) {
       return this.processImportEquals();
     }
+    if (
+      this.tokens.matches4(_types.TokenType._import, _types.TokenType.name, _types.TokenType.name, _types.TokenType.eq) &&
+      this.tokens.matchesContextualAtIndex(this.tokens.currentIndex() + 1, _keywords.ContextualKeyword._type)
+    ) {
+      // import type T = require('T')
+      this.tokens.removeInitialToken();
+      // This construct is always exactly 8 tokens long, so remove the 7 remaining tokens.
+      for (let i = 0; i < 7; i++) {
+        this.tokens.removeToken();
+      }
+      return true;
+    }
     if (this.tokens.matches2(_types.TokenType._export, _types.TokenType.eq)) {
       this.tokens.replaceToken("module.exports");
+      return true;
+    }
+    if (
+      this.tokens.matches5(_types.TokenType._export, _types.TokenType._import, _types.TokenType.name, _types.TokenType.name, _types.TokenType.eq) &&
+      this.tokens.matchesContextualAtIndex(this.tokens.currentIndex() + 2, _keywords.ContextualKeyword._type)
+    ) {
+      // export import type T = require('T')
+      this.tokens.removeInitialToken();
+      // This construct is always exactly 9 tokens long, so remove the 8 remaining tokens.
+      for (let i = 0; i < 8; i++) {
+        this.tokens.removeToken();
+      }
       return true;
     }
     if (this.tokens.matches1(_types.TokenType._import)) {

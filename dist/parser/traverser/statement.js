@@ -33,7 +33,6 @@ var _flow = require('../plugins/flow');
 
 
 
-
 var _typescript = require('../plugins/typescript');
 
 
@@ -693,9 +692,13 @@ function parseClassBody(classContextId) {
 
 function parseClassMember(memberStart, classContextId) {
   if (_base.isTypeScriptEnabled) {
-    _typescript.tsParseModifier.call(void 0, [_keywords.ContextualKeyword._declare]);
-    _typescript.tsParseAccessModifier.call(void 0, );
-    _typescript.tsParseModifier.call(void 0, [_keywords.ContextualKeyword._declare]);
+    _typescript.tsParseModifiers.call(void 0, [
+      _keywords.ContextualKeyword._declare,
+      _keywords.ContextualKeyword._public,
+      _keywords.ContextualKeyword._protected,
+      _keywords.ContextualKeyword._private,
+      _keywords.ContextualKeyword._override,
+    ]);
   }
   let isStatic = false;
   if (_tokenizer.match.call(void 0, _types.TokenType.name) && _base.state.contextualKeyword === _keywords.ContextualKeyword._static) {
@@ -729,7 +732,7 @@ function parseClassMemberWithIsStatic(
   classContextId,
 ) {
   if (_base.isTypeScriptEnabled) {
-    if (_typescript.tsTryParseClassMemberWithIsStatic.call(void 0, isStatic, classContextId)) {
+    if (_typescript.tsTryParseClassMemberWithIsStatic.call(void 0, isStatic)) {
       return;
     }
   }
@@ -1065,8 +1068,27 @@ function shouldParseExportDeclaration() {
     _typescript.tsParseImportEqualsDeclaration.call(void 0, );
     return;
   }
-  if (_base.isTypeScriptEnabled) {
-    _util.eatContextual.call(void 0, _keywords.ContextualKeyword._type);
+  if (_base.isTypeScriptEnabled && _util.isContextual.call(void 0, _keywords.ContextualKeyword._type)) {
+    const lookahead = _tokenizer.lookaheadType.call(void 0, );
+    if (lookahead === _types.TokenType.name) {
+      // One of these `import type` cases:
+      // import type T = require('T');
+      // import type A from 'A';
+      _util.expectContextual.call(void 0, _keywords.ContextualKeyword._type);
+      if (_tokenizer.lookaheadType.call(void 0, ) === _types.TokenType.eq) {
+        _typescript.tsParseImportEqualsDeclaration.call(void 0, );
+        return;
+      }
+      // If this is an `import type...from` statement, then we already ate the
+      // type token, so proceed to the regular import parser.
+    } else if (lookahead === _types.TokenType.star || lookahead === _types.TokenType.braceL) {
+      // One of these `import type` cases, in which case we can eat the type token
+      // and proceed as normal:
+      // import type * as A from 'A';
+      // import type {a} from 'A';
+      _util.expectContextual.call(void 0, _keywords.ContextualKeyword._type);
+    }
+    // Otherwise, we are importing the name "type".
   }
 
   // import '...'

@@ -643,9 +643,16 @@ function flowParsePrimaryType() {
 
 function flowParsePostfixType() {
   flowParsePrimaryType();
-  while (!_util.canInsertSemicolon.call(void 0, ) && _index.match.call(void 0, _types.TokenType.bracketL)) {
+  while (!_util.canInsertSemicolon.call(void 0, ) && (_index.match.call(void 0, _types.TokenType.bracketL) || _index.match.call(void 0, _types.TokenType.questionDot))) {
+    _index.eat.call(void 0, _types.TokenType.questionDot);
     _util.expect.call(void 0, _types.TokenType.bracketL);
-    _util.expect.call(void 0, _types.TokenType.bracketR);
+    if (_index.eat.call(void 0, _types.TokenType.bracketR)) {
+      // Array type
+    } else {
+      // Indexed access type
+      flowParseType();
+      _util.expect.call(void 0, _types.TokenType.bracketR);
+    }
   }
 }
 

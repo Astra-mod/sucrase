@@ -114,9 +114,10 @@ export declare enum TokenType {
     _public = 52752,
     _private = 53264,
     _protected = 53776,
-    _as = 54288,
-    _enum = 54800,
-    _type = 55312,
-    _implements = 55824
+    _override = 54288,
+    _as = 54800,
+    _enum = 55312,
+    _type = 55824,
+    _implements = 56336
 }
 export declare function formatTokenType(tokenType: TokenType): string;

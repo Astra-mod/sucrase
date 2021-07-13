@@ -28,6 +28,7 @@ var _Transformer = require('./Transformer'); var _Transformer2 = _interopRequire
       this.tokens.matches1(_types.TokenType._private) ||
       this.tokens.matches1(_types.TokenType._abstract) ||
       this.tokens.matches1(_types.TokenType._readonly) ||
+      this.tokens.matches1(_types.TokenType._override) ||
       this.tokens.matches1(_types.TokenType.nonNullAssertion)
     ) {
       this.tokens.removeInitialToken();

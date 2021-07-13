@@ -1,5 +1,6 @@
 import { ContextualKeyword } from "../tokenizer/keywords";
 import { StopState } from "../traverser/expression";
+export declare function tsParseModifiers(allowedModifiers: Array<ContextualKeyword>): void;
 /** Parses a modifier matching one the given modifier names. */
 export declare function tsParseModifier(allowedModifiers: Array<ContextualKeyword>): ContextualKeyword | null;
 export declare function tsTryParseTypeParameters(): void;
@@ -17,8 +18,7 @@ export declare function tsStartParseNewArguments(): void;
 export declare function tsTryParseExport(): boolean;
 export declare function tsTryParseExportDefaultExpression(): boolean;
 export declare function tsTryParseStatementContent(): boolean;
-export declare function tsParseAccessModifier(): void;
-export declare function tsTryParseClassMemberWithIsStatic(isStatic: boolean, classContextId: number): boolean;
+export declare function tsTryParseClassMemberWithIsStatic(isStatic: boolean): boolean;
 export declare function tsParseIdentifierStatement(contextualKeyword: ContextualKeyword): void;
 export declare function tsParseExportDeclaration(): void;
 export declare function tsAfterParseClassSuper(hasSuper: boolean): void;

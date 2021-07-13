@@ -73,7 +73,10 @@ var _lval = require('./lval');
 
 
 
+
 var _statement = require('./statement');
+
+
 
 
 
@@ -237,7 +240,14 @@ function parseExprOp(startTokenIndex, minPrec, noIn) {
     _typescript.tsParseTypeAssertion.call(void 0, );
     return false;
   }
-
+  if (
+    _util.isContextual.call(void 0, _keywords.ContextualKeyword._module) &&
+    _index3.lookaheadCharCode.call(void 0, ) === _charcodes.charCodes.leftCurlyBrace &&
+    !_util.hasFollowingLineBreak.call(void 0, )
+  ) {
+    parseModuleExpression();
+    return false;
+  }
   if (_base.state.type & _types3.TokenType.IS_PREFIX) {
     _index3.next.call(void 0, );
     parseMaybeUnary();
@@ -495,8 +505,8 @@ function parseNoCallExpr() {
         return false;
       } else if (
         canBeArrow &&
-        !_util.canInsertSemicolon.call(void 0, ) &&
         contextualKeyword === _keywords.ContextualKeyword._async &&
+        !_util.canInsertSemicolon.call(void 0, ) &&
         _index3.match.call(void 0, _types3.TokenType.name)
       ) {
         _base.state.scopeDepth++;
@@ -505,6 +515,10 @@ function parseNoCallExpr() {
         // let foo = async bar => {};
         parseArrowExpression(startTokenIndex);
         return true;
+      } else if (_index3.match.call(void 0, _types3.TokenType._do) && !_util.canInsertSemicolon.call(void 0, )) {
+        _index3.next.call(void 0, );
+        _statement.parseBlock.call(void 0, );
+        return false;
       }
 
       if (canBeArrow && !_util.canInsertSemicolon.call(void 0, ) && _index3.match.call(void 0, _types3.TokenType.arrow)) {
@@ -988,4 +1002,14 @@ function parseYield() {
     _index3.eat.call(void 0, _types3.TokenType.star);
     parseMaybeAssign();
   }
+}
+
+// https://github.com/tc39/proposal-js-module-blocks
+function parseModuleExpression() {
+  _util.expectContextual.call(void 0, _keywords.ContextualKeyword._module);
+  _util.expect.call(void 0, _types3.TokenType.braceL);
+  // For now, just call parseBlockBody to parse the block. In the future when we
+  // implement full support, we'll want to emit scopes and possibly other
+  // information.
+  _statement.parseBlockBody.call(void 0, _types3.TokenType.braceR);
 }

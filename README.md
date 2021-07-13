@@ -1,12 +1,18 @@
 # Sucrase
 
-[![Build Status](https://github.com/alangpierce/sucrase/workflows/All%20tests/badge.svg)](https://github.com/alangpierce/sucrase/actions)
-[![npm version](https://img.shields.io/npm/v/sucrase.svg)](https://www.npmjs.com/package/sucrase)
-[![Install Size](https://packagephobia.now.sh/badge?p=sucrase)](https://packagephobia.now.sh/result?p=sucrase)
+[![Build Status](https://github.com/Astra-mod/sucrase/workflows/All%20tests/badge.svg)](https://github.com/Astra-mod/sucrase/actions)
+[![npm version](https://img.shields.io/npm/v/@astra-mod/sucrase.svg)](https://www.npmjs.com/package/@astra-mod/sucrase)
+[![Install Size](https://packagephobia.now.sh/badge?p=@astra-mod/sucrase)](https://packagephobia.now.sh/result?p=@astra-mod/sucrase)
 [![MIT License](https://img.shields.io/npm/l/express.svg?maxAge=2592000)](LICENSE)
-[![Join the chat at https://gitter.im/sucrasejs](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/sucrasejs/Lobby)
 
-### [Try it out](https://sucrase.io)
+### [Try out the original here](https://sucrase.io)
+
+**This is a modified version of sucrase, only used for a Discord client mod.**
+Changes include:
+- No longer forcefully adds `"use strict";` to the top unless `addUseStrict` is
+  enabled.
+- Removes class field declarations that do not actually set a value independant
+  of whether or not `disableESTransforms` is enabled.
 
 Sucrase is an alternative to Babel that allows super-fast development builds.
 Instead of compiling a large range of JS features to be able to work in Internet
@@ -124,23 +130,16 @@ Two legacy modes can be used with the `import` transform:
 Installation:
 
 ```
-yarn add --dev sucrase  # Or npm install --save-dev sucrase
+yarn add --dev @astra-mod/sucrase  # Or npm install --save-dev @astra-mod/sucrase
 ```
-
-Often, you'll want to use one of the build tool integrations:
-[Webpack](https://github.com/alangpierce/sucrase/tree/main/integrations/webpack-loader),
-[Gulp](https://github.com/alangpierce/sucrase/tree/main/integrations/gulp-plugin),
-[Jest](https://github.com/alangpierce/sucrase/tree/main/integrations/jest-plugin),
-[Rollup](https://github.com/rollup/plugins/tree/master/packages/sucrase),
-[Broccoli](https://github.com/stefanpenner/broccoli-sucrase).
 
 Compile on-the-fly via a require hook with some [reasonable defaults](src/register.ts):
 
 ```js
 // Register just one extension.
-require("sucrase/register/ts");
+require("@astra-mod/sucrase/register/ts");
 // Or register all at once.
-require("sucrase/register");
+require("@astra-mod/sucrase/register");
 ```
 
 Compile on-the-fly via a drop-in replacement for node:
@@ -158,7 +157,7 @@ sucrase ./srcDir -d ./outDir --transforms typescript,imports
 Call from JS directly:
 
 ```js
-import {transform} from "sucrase";
+import {transform} from "@astra-mod/sucrase";
 const compiledCode = transform(code, {transforms: ["typescript", "imports"]}).code;
 ```
 

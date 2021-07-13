@@ -6,6 +6,7 @@ export declare function eatContextual(contextualKeyword: ContextualKeyword): boo
 export declare function expectContextual(contextualKeyword: ContextualKeyword): void;
 export declare function canInsertSemicolon(): boolean;
 export declare function hasPrecedingLineBreak(): boolean;
+export declare function hasFollowingLineBreak(): boolean;
 export declare function isLineTerminator(): boolean;
 export declare function semicolon(): void;
 export declare function expect(type: TokenType): void;

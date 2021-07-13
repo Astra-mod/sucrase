@@ -117,10 +117,11 @@ export var TokenType; (function (TokenType) {
   const _public = 52752; TokenType[TokenType["_public"] = _public] = "_public"; // public keyword
   const _private = 53264; TokenType[TokenType["_private"] = _private] = "_private"; // private keyword
   const _protected = 53776; TokenType[TokenType["_protected"] = _protected] = "_protected"; // protected keyword
-  const _as = 54288; TokenType[TokenType["_as"] = _as] = "_as"; // as keyword
-  const _enum = 54800; TokenType[TokenType["_enum"] = _enum] = "_enum"; // enum keyword
-  const _type = 55312; TokenType[TokenType["_type"] = _type] = "_type"; // type keyword
-  const _implements = 55824; TokenType[TokenType["_implements"] = _implements] = "_implements"; // implements keyword
+  const _override = 54288; TokenType[TokenType["_override"] = _override] = "_override"; // override keyword
+  const _as = 54800; TokenType[TokenType["_as"] = _as] = "_as"; // as keyword
+  const _enum = 55312; TokenType[TokenType["_enum"] = _enum] = "_enum"; // enum keyword
+  const _type = 55824; TokenType[TokenType["_type"] = _type] = "_type"; // type keyword
+  const _implements = 56336; TokenType[TokenType["_implements"] = _implements] = "_implements"; // implements keyword
 })(TokenType || (TokenType = {}));
 export function formatTokenType(tokenType) {
   switch (tokenType) {
@@ -336,6 +337,8 @@ export function formatTokenType(tokenType) {
       return "private";
     case TokenType._protected:
       return "protected";
+    case TokenType._override:
+      return "override";
     case TokenType._as:
       return "as";
     case TokenType._enum:
