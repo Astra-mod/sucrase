@@ -151,12 +151,9 @@ export default function getClassInfo(
           start: nameStartIndex,
           end: tokens.currentIndex(),
         });
-      } else if (!disableESTransforms || isDeclare) {
-        // This is a regular field declaration, like `x;`. With the class transform enabled, we just
-        // remove the line so that no output is produced. With the class transform disabled, we
-        // usually want to preserve the declaration (but still strip types), but if the `declare`
-        // keyword is specified, we should remove the line to avoid initializing the value to
-        // undefined.
+      } else {
+        // This is a regular field declaration, like `x;`. We just remove the line so that
+        // no output is produced.
         rangesToRemove.push({start: statementStartIndex, end: tokens.currentIndex()});
       }
     }

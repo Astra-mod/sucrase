@@ -6,7 +6,9 @@
   type members. ([#636]) (Lucas Garron, Alan Pierce)
 * Add support for Flow indexed access types and optional indexed access types.
   ([#636], [#637])
-* Add option to enable adding use strict, instead of forcing it in each time
+* Add option `addUseStrict` to enable adding use strict, instead of forcing it in each time
+* Fixed enabling `disableESTransforms` making class field declarations in ts
+  stay when they should've been removed.
 
 # 3.19.0 (2021-06-23)
 
