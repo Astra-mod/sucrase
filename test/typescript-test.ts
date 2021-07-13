@@ -638,6 +638,23 @@ describe("typescript transform", () => {
     );
   });
 
+  it("handles and removes `declare module` syntax with an identifier", () => {
+    assertTypeScriptResult(
+      `
+      declare module Builtins {
+        let result: string[];
+        export = result;
+      }
+    `,
+      `"use strict";
+      
+
+
+
+    `,
+    );
+  });
+
   it("handles and removes `declare global` syntax", () => {
     assertTypeScriptResult(
       `
@@ -2454,6 +2471,240 @@ describe("typescript transform", () => {
         const Foo = _A2.default.Foo; E[E["Foo"] = Foo] = "Foo";
         const Bar = _A2.default.Bar; E[E["Bar"] = Bar] = "Bar";
       })(E || (E = {}));
+    `,
+    );
+  });
+
+  it("does not handle a module declaration split by newlines", () => {
+    // See https://github.com/babel/babel/issues/12773 , the proper parsing of
+    // this code is to treat each line as separate valid JS.
+    assertTypeScriptESMResult(
+      `
+      declare
+      module
+      "A"
+      {}
+    `,
+      `
+      declare
+      module
+      "A"
+      {}
+    `,
+    );
+  });
+
+  it("allows and removes namespace statements", () => {
+    assertTypeScriptESMResult(
+      `
+      namespace foo {}
+    `,
+      `
+      
+    `,
+    );
+  });
+
+  it("allows and removes export namespace statements", () => {
+    assertTypeScriptESMResult(
+      `
+      export namespace foo {}
+    `,
+      `
+      
+    `,
+    );
+  });
+
+  it("allows and removes module statements", () => {
+    assertTypeScriptESMResult(
+      `
+      module foo {}
+    `,
+      `
+      
+    `,
+    );
+  });
+
+  it("allows and removes export module statements", () => {
+    assertTypeScriptESMResult(
+      `
+      export module foo {}
+    `,
+      `
+      
+    `,
+    );
+  });
+
+  it("handles abstract constructor signatures", () => {
+    assertTypeScriptESMResult(
+      `
+      let x: abstract new () => void = X;
+    `,
+      `
+      let x = X;
+    `,
+    );
+  });
+
+  it("handles import type =", () => {
+    assertTypeScriptESMResult(
+      `
+      import type A = require("A");
+    `,
+      `
+      ;
+    `,
+    );
+  });
+
+  it("handles importing an identifier named type", () => {
+    assertTypeScriptESMResult(
+      `
+      import type = require("A");
+    `,
+      `
+      ;
+    `,
+    );
+  });
+
+  it("handles export import type =", () => {
+    assertTypeScriptESMResult(
+      `
+      export import type B = require("B");
+    `,
+      `
+      ;
+    `,
+    );
+  });
+
+  it("allows static index signatures", () => {
+    assertTypeScriptESMResult(
+      `
+      class C {
+        static [x: string]: any;
+      }
+    `,
+      `
+      class C {
+        
+      }
+    `,
+    );
+  });
+
+  it("allows static index signatures with other modifiers", () => {
+    assertTypeScriptESMResult(
+      `
+      class C {
+        static readonly [x: string]: any;
+      }
+    `,
+      `
+      class C {
+        
+      }
+    `,
+    );
+  });
+
+  it("allows static index signatures not starting with static", () => {
+    assertTypeScriptESMResult(
+      `
+      class C {
+        readonly static [x: string]: any;
+      }
+    `,
+      `
+      class C {
+        
+      }
+    `,
+    );
+  });
+
+  it("allows and removes the override keyword on class methods", () => {
+    assertTypeScriptESMResult(
+      `
+      class A extends B {
+        override method1(): void {}
+        public override method2(): void {}
+        override public method3(): void {}
+        override field1 = 1;
+        static override field2 = 2;
+      }
+    `,
+      `
+      class A extends B {constructor(...args) { super(...args); A.prototype.__init.call(this); }
+         method1() {}
+          method2() {}
+          method3() {}
+         __init() {this.field1 = 1}
+        static  __initStatic() {this.field2 = 2}
+      } A.__initStatic();
+    `,
+    );
+  });
+
+  it("allows override on constructor params", () => {
+    assertTypeScriptESMResult(
+      `
+      class A extends B {
+        constructor(override foo: string) {
+        }
+      }
+    `,
+      `
+      class A extends B {
+        constructor( foo) {;this.foo = foo;
+        }
+      }
+    `,
+    );
+  });
+
+  it("allows getters and setters on interfaces and object types", () => {
+    assertTypeScriptESMResult(
+      `
+      interface A {
+        get foo(): string;
+        set foo(s: string);
+      }
+      type T = {
+        get bar(): number;
+        set bar(n: number);
+      }
+    `,
+      `
+      
+
+
+
+
+
+
+
+    `,
+    );
+  });
+
+  it("allows keys named get and set", () => {
+    assertTypeScriptESMResult(
+      `
+      type T = {
+        get: 3,
+        set: 4,
+      }
+    `,
+      `
+      
+
+
+
     `,
     );
   });

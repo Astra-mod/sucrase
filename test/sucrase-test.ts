@@ -1312,6 +1312,22 @@ describe("sucrase", () => {
     );
   });
 
+  it("parses and passes through `async do` expressions", () => {
+    assertResult(
+      `
+      async do {
+        await foo();
+      }
+    `,
+      `
+      async do {
+        await foo();
+      }
+    `,
+      {transforms: []},
+    );
+  });
+
   it("omits optional chaining nullish transformations if ES transforms disabled", () => {
     assertResult(
       `
@@ -1407,6 +1423,28 @@ describe("sucrase", () => {
       }
     `,
       {transforms: [], disableESTransforms: true},
+    );
+  });
+
+  it("parses module blocks (but doesn't transform them specially)", () => {
+    assertResult(
+      `
+      const workerBlock = module {
+        const x: number = 3;
+        console.log("Hello");
+      };
+      const worker: Worker = new Worker(workerBlock, {type: "module"});
+      console.log("World");
+    `,
+      `
+      const workerBlock = module {
+        const x = 3;
+        console.log("Hello");
+      };
+      const worker = new Worker(workerBlock, {type: "module"});
+      console.log("World");
+    `,
+      {transforms: ["typescript"]},
     );
   });
 });
