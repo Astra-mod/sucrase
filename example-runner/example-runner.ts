@@ -29,7 +29,7 @@ async function main(): Promise<void> {
   if (projects.length === 0) {
     projects = Object.keys(EXAMPLES);
   }
-  const originalCwd = process.cwd();
+
   await run("yarn link");
 
   const results: Array<string> = [];

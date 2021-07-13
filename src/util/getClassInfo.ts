@@ -83,16 +83,12 @@ export default function getClassInfo(
       const statementStartIndex = tokens.currentIndex();
       let isStatic = false;
       let isESPrivate = false;
-      let isDeclare = false;
       while (isAccessModifier(tokens.currentToken())) {
         if (tokens.matches1(tt._static)) {
           isStatic = true;
         }
         if (tokens.matches1(tt.hash)) {
           isESPrivate = true;
-        }
-        if (tokens.matches1(tt._declare)) {
-          isDeclare = true;
         }
         tokens.nextToken();
       }

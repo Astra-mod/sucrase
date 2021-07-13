@@ -12,10 +12,7 @@ const TSC = "./node_modules/.bin/tsc";
 const fast = process.argv.includes("--fast");
 
 async function main(): Promise<void> {
-  const promiseFactories = [
-    () => buildBenchmark(),
-    () => buildSucrase(),
-  ];
+  const promiseFactories = [() => buildBenchmark(), () => buildSucrase()];
   if (fast) {
     await Promise.all(promiseFactories.map((f) => f()));
   } else {
@@ -62,26 +59,6 @@ async function buildSucrase(): Promise<void> {
     await run(`${TSC} --project ./src --outDir ./dist-types`);
     await mergeDirectoryContents("./dist-types/src", "./dist");
     await run("yarn link");
-  }
-}
-
-async function buildIntegration(path: string): Promise<void> {
-  console.log(`Building ${path}`);
-  if (!fast) {
-    const originalDir = process.cwd();
-    process.chdir(path);
-    await run("yarn");
-    await run("yarn link @astra-mod/sucrase");
-    process.chdir(originalDir);
-  }
-
-  await run(`rm -rf ${path}/dist`);
-  await run(`${SUCRASE} ${path}/src -d ${path}/dist --transforms imports,typescript -q`);
-
-  if (!fast) {
-    await run(
-      `${TSC} --emitDeclarationOnly --declaration --isolatedModules false --project ${path} --outDir ${path}/dist`,
-    );
   }
 }
 
