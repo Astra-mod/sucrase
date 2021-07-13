@@ -436,7 +436,33 @@ describe("transform flow", () => {
     );
   });
 
-  it("properly removes class property variance markers with ES transforms disabled", () => {
+  it("recognizes flow indexed access types", () => {
+    assertFlowResult(
+      `
+      type A = Obj['a'];
+      type B = Array<string>[number];
+    `,
+      `
+      
+
+    `,
+    );
+  });
+
+  it("recognizes flow optional indexed access types", () => {
+    assertFlowResult(
+      `
+      type A = Obj?.['a'];
+      type B = Array<string>?.[number];
+    `,
+      `
+      
+
+    `,
+    );
+  });
+
+  it("properly removes class property with ES transforms disabled", () => {
     assertFlowResult(
       `
       class C {
@@ -446,8 +472,8 @@ describe("transform flow", () => {
     `,
       `
       class C {
-        foo;
-        bar;
+        ;
+        ;
       }
     `,
       {disableESTransforms: true},

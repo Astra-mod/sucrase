@@ -29,7 +29,6 @@ In addition to filing issues, there are lots of ways to contribute:
   more.
 * Add better performance tests.
 * Add better documentation, like a Getting Started guide.
-* Write more integrations for Sucrase, like a Browserify plugin.
 
 Contributing features, refactors, and performance improvements to the "core" of
 Sucrase (the parser and the transformers) may need some more thought and care.
@@ -74,8 +73,6 @@ several smaller packages/projects). Here are the most important directories:
   is most relevant. Nearly all tests simply give code as input and assert the
   output code. Running a test in debug mode and stepping through different parts
   of the code is a great way to learn how Sucrase works!
-* The `integrations` directory has several small packages integrating Sucrase
-  with Webpack, Jest, etc.
 * The `example-runner` directory has code to clone various open source projects,
   run Sucrase on them, then run the tests to make sure that the Sucrase output
   was correct. You can run all example projects with `yarn run-examples`.

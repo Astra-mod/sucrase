@@ -13,13 +13,7 @@ async function main(): Promise<void> {
     console.log("Must run build before lint, running build...");
     await run("yarn build");
   }
-  await Promise.all([
-    checkSucrase(),
-    checkProject("./integrations/gulp-plugin"),
-    checkProject("./integrations/jest-plugin"),
-    checkProject("./integrations/webpack-loader"),
-    checkProject("./integrations/webpack-object-rest-spread-plugin"),
-  ]);
+  await Promise.all([checkSucrase()]);
 }
 
 async function checkSucrase(): Promise<void> {
@@ -30,13 +24,6 @@ async function checkSucrase(): Promise<void> {
         .map((dir) => `'${dir}/**/*.ts'`)
         .join(" ")}`,
     ),
-  ]);
-}
-
-async function checkProject(path: string): Promise<void> {
-  await Promise.all([
-    run(`${TSC} --project ${path} --noEmit`),
-    run(`${ESLINT} '${path}/src/**/*.{ts,tsx}'`),
   ]);
 }
 

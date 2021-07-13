@@ -83,16 +83,12 @@ export default function getClassInfo(
       const statementStartIndex = tokens.currentIndex();
       let isStatic = false;
       let isESPrivate = false;
-      let isDeclare = false;
       while (isAccessModifier(tokens.currentToken())) {
         if (tokens.matches1(tt._static)) {
           isStatic = true;
         }
         if (tokens.matches1(tt.hash)) {
           isESPrivate = true;
-        }
-        if (tokens.matches1(tt._declare)) {
-          isDeclare = true;
         }
         tokens.nextToken();
       }
@@ -151,12 +147,9 @@ export default function getClassInfo(
           start: nameStartIndex,
           end: tokens.currentIndex(),
         });
-      } else if (!disableESTransforms || isDeclare) {
-        // This is a regular field declaration, like `x;`. With the class transform enabled, we just
-        // remove the line so that no output is produced. With the class transform disabled, we
-        // usually want to preserve the declaration (but still strip types), but if the `declare`
-        // keyword is specified, we should remove the line to avoid initializing the value to
-        // undefined.
+      } else {
+        // This is a regular field declaration, like `x;`. We just remove the line so that
+        // no output is produced.
         rangesToRemove.push({start: statementStartIndex, end: tokens.currentIndex()});
       }
     }
@@ -318,6 +311,7 @@ function isAccessModifier(token: Token): boolean {
     tt._public,
     tt._private,
     tt._protected,
+    tt._override,
     tt._abstract,
     tt.star,
     tt._declare,
