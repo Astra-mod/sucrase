@@ -15,10 +15,6 @@ async function main(): Promise<void> {
   const promiseFactories = [
     () => buildBenchmark(),
     () => buildSucrase(),
-    () => buildIntegration("./integrations/gulp-plugin"),
-    () => buildIntegration("./integrations/jest-plugin"),
-    () => buildIntegration("./integrations/webpack-loader"),
-    () => buildIntegration("./integrations/webpack-object-rest-spread-plugin"),
   ];
   if (fast) {
     await Promise.all(promiseFactories.map((f) => f()));
@@ -65,7 +61,6 @@ async function buildSucrase(): Promise<void> {
     // Also add in .d.ts files from tsc, which only need to be compiled once.
     await run(`${TSC} --project ./src --outDir ./dist-types`);
     await mergeDirectoryContents("./dist-types/src", "./dist");
-    // Link all integrations to Sucrase so that all building/linting/testing is up to date.
     await run("yarn link");
   }
 }

@@ -15,10 +15,6 @@ async function main(): Promise<void> {
   }
   await Promise.all([
     checkSucrase(),
-    checkProject("./integrations/gulp-plugin"),
-    checkProject("./integrations/jest-plugin"),
-    checkProject("./integrations/webpack-loader"),
-    checkProject("./integrations/webpack-object-rest-spread-plugin"),
   ]);
 }
 
