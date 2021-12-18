@@ -1,10 +1,11 @@
-import * as pirates from "pirates";
+import * as pirates from "@astra-mod/pirates";
 
 import {Options, transform} from "./index";
 
 export interface HookOptions {
   matcher?: (code: string) => boolean;
   ignoreNodeModules?: boolean;
+  preHook?: (filename: string) => string;
 }
 
 export type RevertFunction = () => void;

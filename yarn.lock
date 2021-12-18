@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@astra-mod/pirates@^4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@astra-mod/pirates/-/pirates-4.1.0.tgz#c781c3dac2d561a74e116e43cb2c9a1beb0cdde1"
+  integrity sha512-kv3GgNmmOs0OhhMVxvqcFD/jAAiICbMsO8mlnNJNuqIiYi5QIQiml61ubTddhECa00fiDE7B2oMfLeVClMxIkg==
+
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.12.13":
   version "7.12.13"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.12.13.tgz#dcfc826beef65e75c50e21d3837d7d95798dd658"
