@@ -2,6 +2,7 @@ import { Options } from "./index";
 export interface HookOptions {
     matcher?: (code: string) => boolean;
     ignoreNodeModules?: boolean;
+    preHook?: (filename: string) => string;
 }
 export declare type RevertFunction = () => void;
 export declare function addHook(extension: string, options: Options, hookOptions?: HookOptions): RevertFunction;

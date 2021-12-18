@@ -1,6 +1,7 @@
-import * as pirates from "pirates";
+import * as pirates from "@astra-mod/pirates";
 
 import { transform} from "./index";
+
 
 
 

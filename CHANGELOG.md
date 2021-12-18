@@ -1,3 +1,8 @@
+# 3.20.1 (2021-12-18)
+
+* Switch `pirates` to `@astra-mod/pirates`
+* Add support to pass `preHook` option to `pirates`
+
 # 3.20.0 (2021-07-07)
 
 * Various small bug fixes and upcoming JS feature support in the parser. ([#632], [#635], [#637])
