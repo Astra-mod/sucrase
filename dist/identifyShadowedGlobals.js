@@ -87,7 +87,10 @@ function markShadowedGlobals(
 function markShadowedForScope(scope, tokens, name) {
   for (let i = scope.startTokenIndex; i < scope.endTokenIndex; i++) {
     const token = tokens.tokens[i];
-    if (token.type === _types.TokenType.name && tokens.identifierNameForToken(token) === name) {
+    if (
+      (token.type === _types.TokenType.name || token.type === _types.TokenType.jsxName) &&
+      tokens.identifierNameForToken(token) === name
+    ) {
       token.shadowsGlobal = true;
     }
   }
