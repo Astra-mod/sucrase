@@ -650,7 +650,7 @@ var _moduleName = require('moduleName');
         return <Foo />;
       }
     `,
-      `"use strict";${JSX_PREFIX}${IMPORT_DEFAULT_PREFIX}
+      `${JSX_PREFIX}${IMPORT_DEFAULT_PREFIX}
       var _react = require('react'); var _react2 = _interopRequireDefault(_react);
       var _Foo = require('./Foo'); var _Foo2 = _interopRequireDefault(_Foo);
       
@@ -1175,7 +1175,7 @@ module.exports = exports.default;
       export default a
       function b() {}
     `,
-      `"use strict";${ESMODULE_PREFIX}
+      `${ESMODULE_PREFIX}
       const a = {}
       exports. default = a
       function b() {}
@@ -1190,7 +1190,7 @@ module.exports = exports.default;
       export default async function blah() {}
       blah();
     `,
-      `"use strict";${ESMODULE_PREFIX}
+      `${ESMODULE_PREFIX}
        async function blah() {} exports.default = blah;
       blah();
     `,
