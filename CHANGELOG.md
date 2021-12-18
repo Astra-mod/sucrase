@@ -1,7 +1,20 @@
-# 3.20.1 (2021-12-18)
+# 3.20.3 (2021-12-18)
 
+* Allow the names `true`, `false`, and `null` as TS enum keys. ([#656], [#657]) (pushkine, Alan Pierce)
+* Properly handle TS definite assignment assertions for private fields and when
+  disabling the class transform. ([#658])
 * Switch `pirates` to `@astra-mod/pirates`
 * Add support to pass `preHook` option to `pirates`
+
+# 3.20.2 (2021-10-07)
+
+* Fix ASI issue that broke function declarations immediately following a default
+  export. ([#648]) (Ben Lambert)
+
+# 3.20.1 (2021-08-09)
+
+* Fix transformation of anonymous "export default" classes. ([#614]) (Matthieu Gicquel)
+* Handle shadowed globals when they are JSX names. ([#642]) (Matthieu Gicquel)
 
 # 3.20.0 (2021-07-07)
 
@@ -369,6 +382,7 @@
 [#540]: https://github.com/alangpierce/sucrase/pull/540
 [#604]: https://github.com/alangpierce/sucrase/pull/604
 [#610]: https://github.com/alangpierce/sucrase/pull/610
+[#614]: https://github.com/alangpierce/sucrase/pull/614
 [#619]: https://github.com/alangpierce/sucrase/pull/619
 [#621]: https://github.com/alangpierce/sucrase/pull/621
 [#623]: https://github.com/alangpierce/sucrase/pull/623
@@ -378,3 +392,8 @@
 [#635]: https://github.com/alangpierce/sucrase/pull/635
 [#636]: https://github.com/alangpierce/sucrase/pull/636
 [#637]: https://github.com/alangpierce/sucrase/pull/637
+[#642]: https://github.com/alangpierce/sucrase/pull/642
+[#648]: https://github.com/alangpierce/sucrase/pull/648
+[#656]: https://github.com/alangpierce/sucrase/pull/656
+[#657]: https://github.com/alangpierce/sucrase/pull/657
+[#658]: https://github.com/alangpierce/sucrase/pull/658
