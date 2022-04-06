@@ -1,3 +1,7 @@
+# 3.21.0 (2022-04-06)
+
+* Restructure package directory layout to better support ESM. ([#684]) (Neo Nie)
+
 # 3.20.3 (2021-12-18)
 
 * Allow the names `true`, `false`, and `null` as TS enum keys. ([#656], [#657]) (pushkine, Alan Pierce)
@@ -397,3 +401,4 @@
 [#656]: https://github.com/alangpierce/sucrase/pull/656
 [#657]: https://github.com/alangpierce/sucrase/pull/657
 [#658]: https://github.com/alangpierce/sucrase/pull/658
+[#684]: https://github.com/alangpierce/sucrase/pull/684
