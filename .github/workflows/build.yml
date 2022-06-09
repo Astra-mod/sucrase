@@ -26,8 +26,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - node_version: '10'
-          - node_version: '12'
+          # We support down to node 8, but mocha requires node 14.
           - node_version: '14'
     steps:
       - uses: actions/checkout@v2
