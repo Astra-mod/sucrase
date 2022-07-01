@@ -1523,4 +1523,36 @@ describe("sucrase", () => {
     `,
     );
   });
+
+  it("allows static blocks with a line break after the static keyword", () => {
+    assertResult(
+      `
+      class A {
+        static
+        {
+          console.log("hi");
+        }
+      }
+    `,
+      `"use strict";
+      class A {
+        static
+        {
+          console.log("hi");
+        }
+      }
+    `,
+    );
+  });
+
+  it("allows arrow functions with parameter object assignment", () => {
+    assertResult(
+      `
+      ({x = 1}) => null
+    `,
+      `"use strict";
+      ({x = 1}) => null
+    `,
+    );
+  });
 });
