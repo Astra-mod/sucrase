@@ -5,7 +5,8 @@ dist
 dist-self-build
 dist-types
 example-runner/example-repos
-test262/test262-checkout
+spec-compliance-tests/test262/test262-checkout
+spec-compliance-tests/babel-tests/babel-tests-checkout
 .nyc_output
 coverage.lcov
 benchmark/sample/jest
