@@ -55,6 +55,11 @@ export interface Options {
    * Add use strict on top of each file
    */
   addUseStrict?: boolean;
+  /**
+   * If specified, the imports transform does not attempt to change dynamic import()
+   * expressions into require() calls.
+   */
+  preserveDynamicImport?: boolean;
 }
 
 export function validateOptions(options: Options): void {
