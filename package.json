@@ -69,7 +69,7 @@
     "typescript": "^4.1.3"
   },
   "dependencies": {
-    "@astra-mod/pirates": "^4.1.0",
+    "@astra-mod/pirates": "^4.2.0",
     "commander": "^4.0.0",
     "glob": "7.1.6",
     "lines-and-columns": "^1.1.6",
