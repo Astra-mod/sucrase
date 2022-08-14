@@ -28,6 +28,8 @@ var _tsinterfacechecker = require('ts-interface-checker'); var t = _interopRequi
   production: t.opt("boolean"),
   disableESTransforms: t.opt("boolean"),
   addUseStrict: t.opt("boolean"),
+  preserveDynamicImport: t.opt("boolean"),
+  injectCreateRequireForImportRequire: t.opt("boolean"),
 }); exports.Options = Options;
 
 const exportedTypeSuite = {

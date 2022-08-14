@@ -86,6 +86,7 @@ var _TypeScriptTransformer = require('./TypeScriptTransformer'); var _TypeScript
           reactHotLoaderTransformer,
           enableLegacyBabel5ModuleInterop,
           transforms.includes("typescript"),
+          Boolean(options.preserveDynamicImport),
         ),
       );
     } else {
@@ -93,6 +94,7 @@ var _TypeScriptTransformer = require('./TypeScriptTransformer'); var _TypeScript
         new (0, _ESMImportTransformer2.default)(
           tokenProcessor,
           this.nameManager,
+          this.helperManager,
           reactHotLoaderTransformer,
           transforms.includes("typescript"),
           options,
@@ -101,7 +103,9 @@ var _TypeScriptTransformer = require('./TypeScriptTransformer'); var _TypeScript
     }
 
     if (transforms.includes("flow")) {
-      this.transformers.push(new (0, _FlowTransformer2.default)(this, tokenProcessor));
+      this.transformers.push(
+        new (0, _FlowTransformer2.default)(this, tokenProcessor, transforms.includes("imports")),
+      );
     }
     if (transforms.includes("typescript")) {
       this.transformers.push(

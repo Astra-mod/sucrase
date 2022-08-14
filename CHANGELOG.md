@@ -1,3 +1,50 @@
+# 3.25.0 (2022-08-01)
+
+* Add two new options to more closely match the `module: nodenext` option from
+  [TypeScript 4.7](https://devblogs.microsoft.com/typescript/announcing-typescript-4-7/#commonjs-interoperability):
+  * When using the `imports` transform, the new flag `preserveDynamicImport`
+    will leave dynamic `import()` calls alone rather than compiling them to
+    promise-wrapped `require`. This makes it possible to load ESM modules from
+    CommonJS. ([#727])
+  * When *not* using the `imports` transform, the new flag `injectCreateRequireForImportRequire`
+    will compile `import foo = require("foo");` to use `createRequire` so that
+    can work in a Node ES module. ([#728])
+* When `disableESTransforms` is enabled, remove `abstract` fields in the same
+  way that `declare` fields are removed. This matches TypeScript's behavior. ([#732])
+
+# 3.24.0 (2022-07-14)
+
+* Add support for all new syntax in TypeScript 4.7: ([#719])
+  * Instantiation expressions: `const NumberSet = Set<number>;`
+  * `extends` on `infer`: `T extends [infer S extends string, ...unknown[]] ? S : never;`
+  * Variance annotations: `type Getter<out T> = () => T;`
+* Add parsing support for the `accessor` keyword in ES decorators. ([#716])
+* Fix invalid ESM output that sometimes happened when eliding TS star imports. ([#723])
+* Fix lots of parser edge case bugs. Examples of code that confused the parser before but now works:
+  * `a as b ?? c` ([#721])
+  * `const a: Array<number>=[];` ([#717])
+  * `f<<T>() => void>()` ([#716])
+  * Some additional cases involving line break handling. ([#714])
+* Fix some edge cases with JSX entity transformation. ([#717])
+
+# 3.23.0 (2022-07-01)
+
+* Add support for TS 4.5 import/export type modifiers. ([#713])
+* Fix parsing bug that failed on scientific notation with dot access. ([#711])
+
+# 3.22.0 (2022-06-27)
+
+* Add support for Flow enums. ([#708], [#709])
+* Fix some parser bugs when detecting arrow functions. ([#673])
+
+# 3.21.1 (2022-06-21)
+
+* Allow re-export after star export of same name. ([#698]) (Cameron Pitt)
+
+# 3.21.0 (2022-04-06)
+
+* Restructure package directory layout to better support ESM. ([#684]) (Neo Nie)
+
 # 3.20.3 (2021-12-18)
 
 * Allow the names `true`, `false`, and `null` as TS enum keys. ([#656], [#657]) (pushkine, Alan Pierce)
@@ -397,3 +444,19 @@
 [#656]: https://github.com/alangpierce/sucrase/pull/656
 [#657]: https://github.com/alangpierce/sucrase/pull/657
 [#658]: https://github.com/alangpierce/sucrase/pull/658
+[#673]: https://github.com/alangpierce/sucrase/pull/673
+[#684]: https://github.com/alangpierce/sucrase/pull/684
+[#698]: https://github.com/alangpierce/sucrase/pull/698
+[#708]: https://github.com/alangpierce/sucrase/pull/708
+[#709]: https://github.com/alangpierce/sucrase/pull/709
+[#711]: https://github.com/alangpierce/sucrase/pull/711
+[#713]: https://github.com/alangpierce/sucrase/pull/713
+[#714]: https://github.com/alangpierce/sucrase/pull/714
+[#716]: https://github.com/alangpierce/sucrase/pull/716
+[#717]: https://github.com/alangpierce/sucrase/pull/717
+[#719]: https://github.com/alangpierce/sucrase/pull/719
+[#721]: https://github.com/alangpierce/sucrase/pull/721
+[#723]: https://github.com/alangpierce/sucrase/pull/723
+[#727]: https://github.com/alangpierce/sucrase/pull/727
+[#728]: https://github.com/alangpierce/sucrase/pull/728
+[#732]: https://github.com/alangpierce/sucrase/pull/732
