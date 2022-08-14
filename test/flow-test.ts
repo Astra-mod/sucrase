@@ -159,7 +159,7 @@ describe("transform flow", () => {
       `
       export default 3;
     `,
-      `"use strict";${ESMODULE_PREFIX}
+      `${ESMODULE_PREFIX}
       exports. default = 3;
     `,
     );
@@ -496,7 +496,7 @@ describe("transform flow", () => {
       `
       import {foo as as} from "./Foo";
     `,
-      `"use strict";
+      `
       var _Foo = require('./Foo');
     `,
     );
@@ -510,7 +510,7 @@ describe("transform flow", () => {
         B = 2,
       }
     `,
-      `"use strict";
+      `
       const E = require("flow-enums-runtime")({
         A: 1,
         B: 2,
@@ -527,7 +527,7 @@ describe("transform flow", () => {
         B,
       }
     `,
-      `"use strict";
+      `
       const E = require("flow-enums-runtime").Mirrored([
         "A",
         "B",
@@ -544,7 +544,7 @@ describe("transform flow", () => {
         B
       }
     `,
-      `"use strict";
+      `
       const E = require("flow-enums-runtime")({
         A: Symbol("A"),
         B: Symbol("B")
@@ -561,7 +561,7 @@ describe("transform flow", () => {
         B = 2
       }
     `,
-      `"use strict";
+      `
       const E = require("flow-enums-runtime")({
         A: 1,
         B: 2
@@ -576,7 +576,7 @@ describe("transform flow", () => {
       enum E {
       }
     `,
-      `"use strict";
+      `
       const E = require("flow-enums-runtime").Mirrored([
       ]);
     `,
@@ -592,7 +592,7 @@ describe("transform flow", () => {
         ...
       }
     `,
-      `"use strict";
+      `
       const E = require("flow-enums-runtime").Mirrored([
         "A",
         "B",
@@ -611,7 +611,7 @@ describe("transform flow", () => {
         ...
       }
     `,
-      `"use strict";
+      `
       const E = require("flow-enums-runtime")({
         A: 1,
         B: 2,
@@ -646,7 +646,7 @@ describe("transform flow", () => {
         B
       }
     `,
-      `"use strict";${ESMODULE_PREFIX}
+      `${ESMODULE_PREFIX}
        const E = require("flow-enums-runtime").Mirrored([
         "A",
         "B"
@@ -680,7 +680,7 @@ describe("transform flow", () => {
         B
       }
     `,
-      `"use strict";${ESMODULE_PREFIX}
+      `${ESMODULE_PREFIX}
        const E = require("flow-enums-runtime").Mirrored([
         "A",
         "B"
@@ -694,7 +694,7 @@ describe("transform flow", () => {
       `
       type T = ??number;
     `,
-      `"use strict";
+      `
       
     `,
     );

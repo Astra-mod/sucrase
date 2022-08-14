@@ -1049,7 +1049,7 @@ module.exports = exports.default;
         console.log(Bar);
       }
     `,
-      `"use strict";${IMPORT_DEFAULT_PREFIX}
+      `${IMPORT_DEFAULT_PREFIX}
       var _Barjs = require('./Bar.js'); var _Barjs2 = _interopRequireDefault(_Barjs);
       async function loadThing() {
         const foo = await import('foo');

@@ -405,7 +405,7 @@ describe("sucrase", () => {
         static x = 3;
       }
     `,
-      `"use strict";${ESMODULE_PREFIX} var _class;
+      `${ESMODULE_PREFIX} var _class;
       exports. default = (_class = class {
         static __initStatic() {this.x = 3}
       }, _class.__initStatic(), _class)
@@ -421,7 +421,7 @@ describe("sucrase", () => {
         x = 3
       }
     `,
-      `"use strict";${ESMODULE_PREFIX} var _class;
+      `${ESMODULE_PREFIX} var _class;
       exports. default = (_class = class {constructor() { _class.prototype.__init.call(this); }
         __init() {this.x = 3}
       }, _class)
@@ -1485,7 +1485,7 @@ describe("sucrase", () => {
       `
       console.log(1e5.toString());
     `,
-      `"use strict";
+      `
       console.log(1e5.toString());
     `,
     );
@@ -1496,7 +1496,7 @@ describe("sucrase", () => {
       `
       const x = 0x8badf00d;
     `,
-      `"use strict";
+      `
       const x = 0x8badf00d;
     `,
     );
@@ -1507,7 +1507,7 @@ describe("sucrase", () => {
       `
       const x = 0xabcden;
     `,
-      `"use strict";
+      `
       const x = 0xabcden;
     `,
     );
@@ -1518,7 +1518,7 @@ describe("sucrase", () => {
       `
       const x = 1e-10;
     `,
-      `"use strict";
+      `
       const x = 1e-10;
     `,
     );
@@ -1534,7 +1534,7 @@ describe("sucrase", () => {
         }
       }
     `,
-      `"use strict";
+      `
       class A {
         static
         {
@@ -1550,7 +1550,7 @@ describe("sucrase", () => {
       `
       ({x = 1}) => null
     `,
-      `"use strict";
+      `
       ({x = 1}) => null
     `,
     );
@@ -1562,7 +1562,7 @@ describe("sucrase", () => {
       `
       const x = () => [].includes(true) || "ontouchend" in document
     `,
-      `"use strict";
+      `
       const x = () => [].includes(true) || "ontouchend" in document
     `,
     );
@@ -1574,13 +1574,13 @@ describe("sucrase", () => {
       `
       const r = /foo/v;
     `,
-      `"use strict";
+      `
       const r = /foo/v;
     `,
     );
   });
 
-  it("passes through decorators with accessor keyword", () => {
+  it("does not pass through decorators with accessor keyword", () => {
     assertResult(
       `
       @defineElement("my-class")
@@ -1591,7 +1591,7 @@ describe("sucrase", () => {
       `
       @defineElement("my-class")
       class C extends HTMLElement {
-        @reactive accessor clicked = false;
+          clicked = false;
       }
     `,
       {disableESTransforms: true, transforms: []},

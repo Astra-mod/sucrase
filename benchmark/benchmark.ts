@@ -241,7 +241,7 @@ async function benchmarkFiles(benchmarkOptions: BenchmarkOptions): Promise<void>
             tsx: !path.endsWith(".ts"),
             decorators: true,
           },
-          target: "es2022",
+          target: "es2020",
         },
         module: {
           type: "commonjs",

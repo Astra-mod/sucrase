@@ -900,7 +900,7 @@ describe("typescript transform", () => {
       import a = require('a');
       console.log(a);
     `,
-      `"use strict";
+      `
       const a = require('a');
       console.log(a);
     `,
@@ -1124,9 +1124,9 @@ describe("typescript transform", () => {
         foo!: number;
       }
     `,
-      `"use strict";
+      `
       class A {
-        foo;
+        ;
       }
     `,
       {disableESTransforms: true},
@@ -1155,7 +1155,7 @@ describe("typescript transform", () => {
         #a!: number;
       }
     `,
-      `"use strict";
+      `
       class A {
         #a;
       }
@@ -1170,7 +1170,7 @@ describe("typescript transform", () => {
         #a!: number;
       }
     `,
-      `"use strict";
+      `
       class A {
         #a;
       }
@@ -1476,7 +1476,7 @@ describe("typescript transform", () => {
       @decorator<<T>() => void>()
       class Test {}
     `,
-      `"use strict";
+      `
       @decorator()
       class Test {}
     `,
@@ -2309,7 +2309,7 @@ describe("typescript transform", () => {
       import type from './type';
       console.log(type);
     `,
-      `"use strict";${IMPORT_DEFAULT_PREFIX}
+      `${IMPORT_DEFAULT_PREFIX}
       var _type = require('./type'); var _type2 = _interopRequireDefault(_type);
       console.log(_type2.default);
     `,
@@ -2813,7 +2813,7 @@ describe("typescript transform", () => {
       class B {}
       export {type A, B, type C as D};
     `,
-      `"use strict";${ESMODULE_PREFIX}
+      `${ESMODULE_PREFIX}
       class A {}
       class C {}
       class B {}
@@ -2847,7 +2847,7 @@ describe("typescript transform", () => {
       console.log(Bar);
       console.log(Baz);
     `,
-      `"use strict";
+      `
       
       console.log(Foo);
       console.log(Bar);
@@ -2881,7 +2881,7 @@ describe("typescript transform", () => {
       export {U as foo};
       export {V};
     `,
-      `"use strict";${ESMODULE_PREFIX}
+      `${ESMODULE_PREFIX}
       var _foo = require('./foo');
       
       
@@ -3093,8 +3093,8 @@ describe("typescript transform", () => {
         ;
         ;
         ;
-         e;
-         f;
+        ;
+        ;
          g = 'hello';
       }
     `,
